@@ -16,7 +16,7 @@ export function CartItem({
     return increaseDays(id);
   };
   const handleClickDecreaseDays = () => {
-    return decreaseDays(id);
+    return decreaseDays(id, days);
   };
 
   console.log(images);

@@ -4,6 +4,7 @@ import { Article } from "./components/Article";
 import { Cart } from "./components/Cart";
 import { UserInventory } from "./components/UserInventory";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -21,23 +22,23 @@ function App() {
     }
   }
 
-  function removeArticleFromCart(article) {
-    setCart(cart.filter((item) => item.id !== article));
+  function removeArticleFromCart(articleId) {
+    setCart(cart.filter((item) => item.id !== articleId));
   }
 
-  function increaseDays(article) {
+  function increaseDays(articleId) {
     setCart(
       cart.map((item) =>
-        item.id === article ? { ...item, days: item.days + 1 } : item
+        item.id === articleId ? { ...item, days: item.days + 1 } : item
       )
     );
   }
 
-  function decreaseDays(article) {
-    if (article.days > 1) {
+  function decreaseDays(articleId, articleDays) {
+    if (articleDays > 1) {
       setCart(
         cart.map((item) =>
-          item.id === article ? { ...item, days: item.days - 1 } : item
+          item.id === articleId ? { ...item, days: item.days - 1 } : item
         )
       );
     }
@@ -45,14 +46,15 @@ function App() {
 
   function placeOrder(cart) {
     cart.forEach((item) => (item.startDate = new Date()));
+    cart.forEach((item) => (item.uuid = uuidv4()));
     let newInventory = userInventory;
     cart.forEach((item) => newInventory.push(item));
-    setUserInventory(userInventory);
+    setUserInventory(newInventory);
     setCart([]);
   }
 
-  function returnArticle(article) {
-    setUserInventory(userInventory.filter((item) => item.id !== article));
+  function returnArticle(articleUuid) {
+    setUserInventory(userInventory.filter((item) => item.uuid !== articleUuid));
   }
 
   return (

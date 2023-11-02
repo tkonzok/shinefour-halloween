@@ -1,7 +1,7 @@
 import { dueDate } from "./../utils/dueDate";
 
 export function InventoryItem({
-  id,
+  uuid,
   title,
   images,
   amount,
@@ -10,7 +10,7 @@ export function InventoryItem({
   returnArticle,
 }) {
   const handleClickReturn = () => {
-    return returnArticle(id);
+    return returnArticle(uuid);
   };
 
   return (
