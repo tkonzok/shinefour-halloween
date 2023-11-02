@@ -8,7 +8,7 @@ export function Article({
   addArticleToCart,
 }) {
   const handleClickAddToCart = () => {
-    return addArticleToCart({ id, title, price });
+    return addArticleToCart({ id, title, price, images });
   };
 
   return (

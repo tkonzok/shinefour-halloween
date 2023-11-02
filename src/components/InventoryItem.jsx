@@ -1,9 +1,12 @@
+import { dueDate } from "./../utils/dueDate";
+
 export function InventoryItem({
   id,
   title,
-  price,
+  images,
   amount,
   days,
+  startDate,
   returnArticle,
 }) {
   const handleClickReturn = () => {
@@ -12,12 +15,16 @@ export function InventoryItem({
 
   return (
     <div className="inventory-item">
+      <img className="inventory-image" src={images[0]}></img>
       <p>
         <b>{amount}x</b> {title}
       </p>
-      {days > 1 && <p>{days} days</p>}
-      {days == 1 && <p>{days} day</p>}
-      <p className="price">€ {(price * amount).toFixed(2)}</p>
+      <p className="inventory-date">
+        Rental Date: {startDate.toLocaleDateString("de-de")}
+      </p>
+      <p className="inventory-date">
+        Return Date: {dueDate(startDate, days).toLocaleDateString("de-de")}
+      </p>
       <button onClick={handleClickReturn}>Return Article Now</button>
     </div>
   );

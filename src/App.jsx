@@ -44,7 +44,10 @@ function App() {
   }
 
   function placeOrder(cart) {
-    setUserInventory([...userInventory, cart]);
+    cart.forEach((item) => (item.startDate = new Date()));
+    let newInventory = userInventory;
+    cart.forEach((item) => newInventory.push(item));
+    setUserInventory(userInventory);
     setCart([]);
   }
 
@@ -64,6 +67,7 @@ function App() {
         ))}
       </div>
       <div className="sidebar">
+        <h1>Welcome, {users[0].username}</h1>
         <Cart
           cartItems={cart}
           removeArticleFromCart={removeArticleFromCart}

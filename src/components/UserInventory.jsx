@@ -1,6 +1,7 @@
 import { InventoryItem } from "./InventoryItem";
 
 export function UserInventory({ inventory, returnArticle }) {
+  console.log(inventory);
   return (
     <div className="inventory-sidebar">
       <div className="inventory-articles">

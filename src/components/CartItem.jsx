@@ -1,6 +1,7 @@
 export function CartItem({
   id,
   title,
+  images,
   price,
   amount,
   days,
@@ -18,8 +19,11 @@ export function CartItem({
     return decreaseDays(id);
   };
 
+  console.log(images);
+
   return (
     <div className="cart-item">
+      <img className="cart-image" src={images[0]}></img>
       <p>
         <b>{amount}x</b> {title}
       </p>
